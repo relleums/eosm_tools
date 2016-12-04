@@ -2,11 +2,11 @@
 
 ## Install
 ```bash
-pip install git+https://github.com/releums/eosm_tools
+pip install git+https://github.com/relleums/eosm_tools/
 ```
 
 ## How to use
 
 ```bash
-user@machine:~$ rawtherapee -o rawtout/ -p dng/1558/luf000111.dng.pp3 -c dng/1540
+user@machine:~$ eosm_raw2jpg -i input_raw_file_from_EOSM -o output_directory_full_of_JPGs [-c raw_therapee_config.pp3] 
 ```
