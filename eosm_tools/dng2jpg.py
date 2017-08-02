@@ -16,7 +16,7 @@ def main():
     try:
         arguments = docopt.docopt(__doc__)
 
-        raw2dng_return_value = tools.raw2dng(
+        raw2dng_return_value = tools.dng2jpg(
             dng_path=arguments['--dng_path'],
             out_path=arguments['--out_path'],
             config_path=arguments['--config_path'])
