@@ -5,7 +5,7 @@ Usage: eosm_raw2dng -i=RAW_PATH -o=OUT_DIR
 
 Options:
     -i --raw_path=RAW_PATH          Path to the Canon raw video file.
-    -o --out_dir=OUT_DIR            Directory to the dng output directory.
+    -o --out_dir=OUT_DIR            Output directory with dng images.
 """
 import docopt
 import sys

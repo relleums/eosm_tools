@@ -44,13 +44,13 @@ def raw2dng(raw_path, out_dir, dng_prefix='eosm_', stdout_path=None):
     return rc
 
 
-def dng2jpg(dng_path, out_dir, config_path=None, stdout_path=None):
+def dng2jpg(dng_dir, out_dir, config_path=None, stdout_path=None):
     """
     Convert a series of dng files into JPG files
 
     Parameters
     ----------
-    dng_path
+    dng_dir
 
     out_dir
     """   
@@ -64,11 +64,11 @@ def dng2jpg(dng_path, out_dir, config_path=None, stdout_path=None):
         'rawtherapee',
         '-o', out_dir, # capital letter 'O' saves the input pp3 config in the output dir
         '-p', config_path,
-        '-c', dng_path,
+        '-c', dng_dir,
         '-j1' # JPEG Compression 1 - 100
     ]
 
-    dng_path = os.path.abspath(dng_path)
+    dng_dir = os.path.abspath(dng_dir)
     out_dir = os.path.abspath(out_dir)
     os.makedirs(out_dir, exist_ok=True)
 
@@ -188,7 +188,7 @@ def raw2mp4(
     dng2jpg_config_path = new_dng2jpg_config_path
 
     dng2jpg_rc = dng2jpg(
-        dng_path=dng_dir, 
+        dng_dir=dng_dir, 
         out_dir=jpg_dir, 
         config_path=dng2jpg_config_path,
         stdout_path=os.path.join(std_dir,'dng2jpg')

@@ -1,12 +1,12 @@
 """
 Convert a dng image series into JPG images using Raw Therapee
 
-Usage: eosm_raw2dng -i=DNG_PATH -o=OUT_DIR [-c=CONFIG_PATH]
+Usage: eosm_dng2jpg -i=DNG_DIR -o=OUT_DIR [-c=CONFIG_PATH]
 
-Options:
-    -i --dng_path=DNG_PATH          Path to the Canon raw video file.
-    -o --out_dir=OUT_DIR            Directory to the dng output directory.
-    -c --config_path=CONFIG_PATH    Raw Therapee pp3 config file path.
+Options:    
+    -i --dng_dir=DNG_DIR            Input directory with dng images.
+    -o --out_dir=OUT_DIR            Output directory with jpg iamges.
+    -c --config_path=CONFIG_PATH    Raw Therapee pp3 config path.
 """
 import docopt
 import sys
@@ -16,7 +16,7 @@ def main():
     try:
         arguments = docopt.docopt(__doc__)
         rc = tools.dng2jpg(
-            dng_path=arguments['--dng_path'],
+            dng_dir=arguments['--dng_dir'],
             out_dir=arguments['--out_dir'],
             config_path=arguments['--config_path']
         )
