@@ -18,7 +18,7 @@ setup(
     entry_points={'console_scripts': [
         'eosm_raw2dng = eosm_tools.raw2dng:main',
         'eosm_dng2jpg = eosm_tools.dng2jpg:main',
-        'eosm_raw2jpg = eosm_tools.raw2mp4:main',
+        'eosm_raw2mp4 = eosm_tools.raw2mp4:main',
     ]},
     zip_safe=False,
 )
