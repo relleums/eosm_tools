@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='eosm_tools',
-    version='0.0.0',
+    version='0.0.1',
     description='Tools for the raw video workflow with a Canon EOS M',
     url='https://github.com/relleums/eosm_tools.git',
     author='Sebastian Achim Mueller',
@@ -18,7 +18,7 @@ setup(
     entry_points={'console_scripts': [
         'eosm_raw2dng = eosm_tools.raw2dng:main',
         'eosm_dng2jpg = eosm_tools.dng2jpg:main',
-        'eosm_raw2jpg = eosm_tools.raw2jpg:main',
+        'eosm_raw2jpg = eosm_tools.raw2mp4:main',
     ]},
     zip_safe=False,
 )
