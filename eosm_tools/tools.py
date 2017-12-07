@@ -2,7 +2,9 @@ import os
 import subprocess
 import shutil
 import tempfile
+import glob
 import pkg_resources
+import datetime as dt
 
 def raw2dng(raw_path, out_dir, dng_prefix='eosm_', stdout_path=None):
     """
@@ -144,15 +146,12 @@ def raw2mp4(
 
     # Prepare out_dir
     # ---------------
-    print('lnk raw to out_dir', out_dir, ' ... ', end='', flush=True)
     os.makedirs(out_dir, exist_ok=True)
     std_dir = os.path.join(out_dir,'std')
     os.makedirs(std_dir, exist_ok=True)
+
     raw_basename = os.path.basename(raw_path)
     raw_prefix = os.path.splitext(raw_basename)[0]
-    new_raw_path = os.path.join(out_dir, raw_basename)
-    os.link(raw_path, new_raw_path) # hard link
-    raw_path = new_raw_path
     print('done.')
 
     # RAW to DNG
@@ -221,3 +220,47 @@ def raw2mp4(
         return 0
     else:
         return 1
+
+
+def copy_raw_video_from_sd_card_work_dir(sd_card_100CANON_dir, work_dir):
+    raw_paths_on_sd_card = glob.glob(
+        os.path.join(sd_card_100CANON_dir, '*.RAW')
+    )
+    os.makedirs(work_dir, exist_ok=True)
+
+    for raw_path_on_sd_card in raw_paths_on_sd_card:
+        mtime = dt.datetime.fromtimestamp(
+            os.path.getmtime(raw_path_on_sd_card)
+        )
+
+        raw_dir_in_work_dir = os.path.join(
+            work_dir, 
+            '{year:04d}'.format(year=mtime.year),
+            '{month:02d}'.format(month=mtime.month),
+            '{day:02d}'.format(day=mtime.day),
+            '{hour:02d}{minute:02d}{second:02d}'.format(
+                hour=mtime.hour, 
+                minute=mtime.minute, 
+                second=mtime.second
+            ),
+        )
+        
+        raw_basename_in_work_dir = '{year:04d}{month:02d}{day:02d}_{hour:02d}{minute:02d}{second:02d}.RAW'.format(
+            year=mtime.year,
+            month=mtime.month,
+            day=mtime.day,
+            hour=mtime.hour,
+            minute=mtime.minute,
+            second=mtime.second,
+        )
+        
+        raw_path_in_work_dir = os.path.join(
+            raw_dir_in_work_dir, 
+            raw_basename_in_work_dir
+        )
+
+        print('copy:', raw_path_on_sd_card, raw_path_in_work_dir)
+        if not os.path.exists(raw_path_in_work_dir):
+            os.makedirs(raw_dir_in_work_dir, exist_ok=True)
+            shutil.copy(raw_path_on_sd_card, raw_path_in_work_dir)
+            shutil.copystat(raw_path_on_sd_card, raw_path_in_work_dir)

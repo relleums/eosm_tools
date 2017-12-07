@@ -20,6 +20,7 @@ setup(
         'eosm_dng2jpg = eosm_tools.dng2jpg:main',
         'eosm_jpg2mp4 = eosm_tools.jpg2mp4:main',
         'eosm_raw2mp4 = eosm_tools.raw2mp4:main',
+        'eosm_download = eosm_tools.download:main',
     ]},
     zip_safe=False,
 )

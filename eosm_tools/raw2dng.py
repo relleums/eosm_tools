@@ -14,11 +14,11 @@ from . import tools
 def main():
     try:
         arguments = docopt.docopt(__doc__)
-        rc = tools.raw2dng(
+        tools.copy_raw_video_from_sd_card_work_dir(
             raw_path=arguments['--raw_path'],
             out_dir=arguments['--out_dir'],
         )
-        sys.exit(rc)
+        sys.exit(0)
     except docopt.DocoptExit as e:
         print(e)
 
